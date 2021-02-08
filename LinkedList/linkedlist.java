@@ -75,7 +75,7 @@ public class LinkedList {
 
     public void delete_at_pos(int position) {
         //position out of bounds
-        if (position > size-1) return;
+        if (pos < 0 || position > size-1) return;
         //deleting head
         if (position == 0) {
             head = head.next;
@@ -89,6 +89,34 @@ public class LinkedList {
             counter++;
         }
         n.next = n.next.next;
+    }
+
+    public void insertAtPos(int pos, int d) {
+        //position out of bounds
+        if (pos < 0 || pos > size()) return;
+        Node newNode = new Node();
+        newNode.data = d;
+        if (pos == 0) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+        Node prev = null;
+        Node curr = head;
+        int count = 0;
+        while (count < pos) {
+            prev = curr;
+            curr = curr.next;
+            count++;
+        }
+        //inserting at tail
+        if (curr == null) {
+            prev.next = newNode;
+            return;
+        }
+        //inserting in the middle
+        newNode.next = curr;
+        prev.next = newNode;
     }
 
     public int get_nth(int index) {
